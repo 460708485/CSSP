@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "notice")
 public class NoticeController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(NoticeController.class);
+    private final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 	
 	@Resource
 	private NoticeService noticeService;
@@ -47,7 +48,7 @@ public class NoticeController extends BaseController{
 		try {
 			Notice notice= noticeService.findById(id);
 			response.setData(notice);
-			logger.info(notice);
+			logger.info("",notice);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class NoticeController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = noticeService.add(notice);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class NoticeController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = noticeService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class NoticeController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = noticeService.update(notice);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class NoticeController extends BaseController{
 			}
 			response.setToken(count);
 			List<Notice> noticeList = noticeService.findPageByCondition(condition);
-			logger.info(noticeList);
+			logger.info("",noticeList);
 			response.setData(noticeList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

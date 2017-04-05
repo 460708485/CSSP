@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "sprovince")
 public class SprovinceController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(SprovinceController.class);
+    private final Logger logger = LoggerFactory.getLogger(SprovinceController.class);
 	
 	@Resource
 	private SprovinceService sprovinceService;
@@ -47,7 +48,7 @@ public class SprovinceController extends BaseController{
 		try {
 			Sprovince sprovince= sprovinceService.findById(id);
 			response.setData(sprovince);
-			logger.info(sprovince);
+			logger.info("",sprovince);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class SprovinceController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = sprovinceService.add(sprovince);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class SprovinceController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = sprovinceService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class SprovinceController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = sprovinceService.update(sprovince);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class SprovinceController extends BaseController{
 			}
 			response.setToken(count);
 			List<Sprovince> sprovinceList = sprovinceService.findPageByCondition(condition);
-			logger.info(sprovinceList);
+			logger.info("",sprovinceList);
 			response.setData(sprovinceList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

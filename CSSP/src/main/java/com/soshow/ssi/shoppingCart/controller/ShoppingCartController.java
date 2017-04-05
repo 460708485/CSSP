@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "shoppingCart")
 public class ShoppingCartController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(ShoppingCartController.class);
+    private final Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 	
 	@Resource
 	private ShoppingCartService shoppingCartService;
@@ -47,7 +48,7 @@ public class ShoppingCartController extends BaseController{
 		try {
 			ShoppingCart shoppingCart= shoppingCartService.findById(id);
 			response.setData(shoppingCart);
-			logger.info(shoppingCart);
+			logger.info("",shoppingCart);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class ShoppingCartController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = shoppingCartService.add(shoppingCart);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class ShoppingCartController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = shoppingCartService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class ShoppingCartController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = shoppingCartService.update(shoppingCart);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class ShoppingCartController extends BaseController{
 			}
 			response.setToken(count);
 			List<ShoppingCart> shoppingCartList = shoppingCartService.findPageByCondition(condition);
-			logger.info(shoppingCartList);
+			logger.info("",shoppingCartList);
 			response.setData(shoppingCartList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

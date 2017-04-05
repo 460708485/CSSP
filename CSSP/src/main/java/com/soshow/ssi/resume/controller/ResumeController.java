@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "resume")
 public class ResumeController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(ResumeController.class);
+    private final Logger logger = LoggerFactory.getLogger(ResumeController.class);
 	
 	@Resource
 	private ResumeService resumeService;
@@ -47,7 +48,7 @@ public class ResumeController extends BaseController{
 		try {
 			Resume resume= resumeService.findById(id);
 			response.setData(resume);
-			logger.info(resume);
+			logger.info("",resume);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class ResumeController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = resumeService.add(resume);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class ResumeController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = resumeService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class ResumeController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = resumeService.update(resume);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class ResumeController extends BaseController{
 			}
 			response.setToken(count);
 			List<Resume> resumeList = resumeService.findPageByCondition(condition);
-			logger.info(resumeList);
+			logger.info("",resumeList);
 			response.setData(resumeList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

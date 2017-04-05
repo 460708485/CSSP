@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "scity")
 public class ScityController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(ScityController.class);
+    private final Logger logger = LoggerFactory.getLogger(ScityController.class);
 	
 	@Resource
 	private ScityService scityService;
@@ -47,7 +48,7 @@ public class ScityController extends BaseController{
 		try {
 			Scity scity= scityService.findById(id);
 			response.setData(scity);
-			logger.info(scity);
+			logger.info("",scity);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class ScityController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = scityService.add(scity);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class ScityController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = scityService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class ScityController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = scityService.update(scity);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class ScityController extends BaseController{
 			}
 			response.setToken(count);
 			List<Scity> scityList = scityService.findPageByCondition(condition);
-			logger.info(scityList);
+			logger.info("",scityList);
 			response.setData(scityList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

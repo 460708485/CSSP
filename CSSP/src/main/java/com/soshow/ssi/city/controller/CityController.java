@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "city")
 public class CityController extends BaseController{
 
-	private final Logger logger = Logger.getLogger(CityController.class);
+	private final Logger logger = LoggerFactory.getLogger(CityController.class);
 
 	@Resource
 	private CityService cityService;
@@ -44,10 +45,10 @@ public class CityController extends BaseController{
 		try {
 			City city= cityService.findById(id);
 			response.setData(city);
-			logger.info(city);
+			logger.info("",city);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
-			logger.info("系统错误", t);
+			logger.info("","系统错误", t);
 			response.setErrorResponse(CommErrorEnum.Err03);
 		}
 		return response;
@@ -59,10 +60,10 @@ public class CityController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = cityService.add(city);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
-			logger.info("系统错误", t);
+			logger.info("","系统错误", t);
 			response.setErrorResponse(CommErrorEnum.Err03);
 		}
 		return response;
@@ -74,10 +75,10 @@ public class CityController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = cityService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
-			logger.info("系统错误", t);
+			logger.info("","系统错误", t);
 			response.setErrorResponse(CommErrorEnum.Err03);
 		}
 		return response;
@@ -89,10 +90,10 @@ public class CityController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = cityService.update(city);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
-			logger.info("系统错误", t);
+			logger.info("","系统错误", t);
 			response.setErrorResponse(CommErrorEnum.Err03);
 		}
 		return response;
@@ -114,7 +115,7 @@ public class CityController extends BaseController{
 			}
 			response.setToken(count);
 			List<City> cityList = cityService.findPageByCondition(condition);
-			logger.info(cityList);
+			logger.info("",cityList);
 			response.setData(cityList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

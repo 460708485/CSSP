@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "sdistrict")
 public class SdistrictController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(SdistrictController.class);
+    private final Logger logger = LoggerFactory.getLogger(SdistrictController.class);
 	
 	@Resource
 	private SdistrictService sdistrictService;
@@ -47,7 +48,7 @@ public class SdistrictController extends BaseController{
 		try {
 			Sdistrict sdistrict= sdistrictService.findById(id);
 			response.setData(sdistrict);
-			logger.info(sdistrict);
+			logger.info("",sdistrict);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class SdistrictController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = sdistrictService.add(sdistrict);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class SdistrictController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = sdistrictService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class SdistrictController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = sdistrictService.update(sdistrict);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class SdistrictController extends BaseController{
 			}
 			response.setToken(count);
 			List<Sdistrict> sdistrictList = sdistrictService.findPageByCondition(condition);
-			logger.info(sdistrictList);
+			logger.info("",sdistrictList);
 			response.setData(sdistrictList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

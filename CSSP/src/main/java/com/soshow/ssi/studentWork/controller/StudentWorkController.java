@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "studentWork")
 public class StudentWorkController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(StudentWorkController.class);
+    private final Logger logger = LoggerFactory.getLogger(StudentWorkController.class);
 	
 	@Resource
 	private StudentWorkService studentWorkService;
@@ -47,7 +48,7 @@ public class StudentWorkController extends BaseController{
 		try {
 			StudentWork studentWork= studentWorkService.findById(id);
 			response.setData(studentWork);
-			logger.info(studentWork);
+			logger.info("",studentWork);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class StudentWorkController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = studentWorkService.add(studentWork);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class StudentWorkController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = studentWorkService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class StudentWorkController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = studentWorkService.update(studentWork);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class StudentWorkController extends BaseController{
 			}
 			response.setToken(count);
 			List<StudentWork> studentWorkList = studentWorkService.findPageByCondition(condition);
-			logger.info(studentWorkList);
+			logger.info("",studentWorkList);
 			response.setData(studentWorkList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

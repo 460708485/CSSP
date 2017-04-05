@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "goodsType")
 public class GoodsTypeController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(GoodsTypeController.class);
+    private final Logger logger = LoggerFactory.getLogger(GoodsTypeController.class);
 	
 	@Resource
 	private GoodsTypeService goodsTypeService;
@@ -47,7 +48,7 @@ public class GoodsTypeController extends BaseController{
 		try {
 			GoodsType goodsType= goodsTypeService.findById(id);
 			response.setData(goodsType);
-			logger.info(goodsType);
+			logger.info("",goodsType);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class GoodsTypeController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = goodsTypeService.add(goodsType);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class GoodsTypeController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = goodsTypeService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class GoodsTypeController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = goodsTypeService.update(goodsType);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class GoodsTypeController extends BaseController{
 			}
 			response.setToken(count);
 			List<GoodsType> goodsTypeList = goodsTypeService.findPageByCondition(condition);
-			logger.info(goodsTypeList);
+			logger.info("",goodsTypeList);
 			response.setData(goodsTypeList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

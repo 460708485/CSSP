@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "leaveMessageComments")
 public class LeaveMessageCommentsController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(LeaveMessageCommentsController.class);
+    private final Logger logger = LoggerFactory.getLogger(LeaveMessageCommentsController.class);
 	
 	@Resource
 	private LeaveMessageCommentsService leaveMessageCommentsService;
@@ -47,7 +48,7 @@ public class LeaveMessageCommentsController extends BaseController{
 		try {
 			LeaveMessageComments leaveMessageComments= leaveMessageCommentsService.findById(id);
 			response.setData(leaveMessageComments);
-			logger.info(leaveMessageComments);
+			logger.info("",leaveMessageComments);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class LeaveMessageCommentsController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = leaveMessageCommentsService.add(leaveMessageComments);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class LeaveMessageCommentsController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = leaveMessageCommentsService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class LeaveMessageCommentsController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = leaveMessageCommentsService.update(leaveMessageComments);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class LeaveMessageCommentsController extends BaseController{
 			}
 			response.setToken(count);
 			List<LeaveMessageComments> leaveMessageCommentsList = leaveMessageCommentsService.findPageByCondition(condition);
-			logger.info(leaveMessageCommentsList);
+			logger.info("",leaveMessageCommentsList);
 			response.setData(leaveMessageCommentsList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

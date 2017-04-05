@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "goodsOrderDetailed")
 public class GoodsOrderDetailedController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(GoodsOrderDetailedController.class);
+    private final Logger logger = LoggerFactory.getLogger(GoodsOrderDetailedController.class);
 	
 	@Resource
 	private GoodsOrderDetailedService goodsOrderDetailedService;
@@ -47,7 +48,7 @@ public class GoodsOrderDetailedController extends BaseController{
 		try {
 			GoodsOrderDetailed goodsOrderDetailed= goodsOrderDetailedService.findById(id);
 			response.setData(goodsOrderDetailed);
-			logger.info(goodsOrderDetailed);
+			logger.info("",goodsOrderDetailed);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class GoodsOrderDetailedController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = goodsOrderDetailedService.add(goodsOrderDetailed);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class GoodsOrderDetailedController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = goodsOrderDetailedService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class GoodsOrderDetailedController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = goodsOrderDetailedService.update(goodsOrderDetailed);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class GoodsOrderDetailedController extends BaseController{
 			}
 			response.setToken(count);
 			List<GoodsOrderDetailed> goodsOrderDetailedList = goodsOrderDetailedService.findPageByCondition(condition);
-			logger.info(goodsOrderDetailedList);
+			logger.info("",goodsOrderDetailedList);
 			response.setData(goodsOrderDetailedList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

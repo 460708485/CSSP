@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "goodsLeaveMessage")
 public class GoodsLeaveMessageController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(GoodsLeaveMessageController.class);
+    private final Logger logger = LoggerFactory.getLogger(GoodsLeaveMessageController.class);
 	
 	@Resource
 	private GoodsLeaveMessageService goodsLeaveMessageService;
@@ -47,7 +48,7 @@ public class GoodsLeaveMessageController extends BaseController{
 		try {
 			GoodsLeaveMessage goodsLeaveMessage= goodsLeaveMessageService.findById(id);
 			response.setData(goodsLeaveMessage);
-			logger.info(goodsLeaveMessage);
+			logger.info("",goodsLeaveMessage);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +66,7 @@ public class GoodsLeaveMessageController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = goodsLeaveMessageService.add(goodsLeaveMessage);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +84,7 @@ public class GoodsLeaveMessageController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = goodsLeaveMessageService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +102,7 @@ public class GoodsLeaveMessageController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = goodsLeaveMessageService.update(goodsLeaveMessage);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +130,7 @@ public class GoodsLeaveMessageController extends BaseController{
 			}
 			response.setToken(count);
 			List<GoodsLeaveMessage> goodsLeaveMessageList = goodsLeaveMessageService.findPageByCondition(condition);
-			logger.info(goodsLeaveMessageList);
+			logger.info("",goodsLeaveMessageList);
 			response.setData(goodsLeaveMessageList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {

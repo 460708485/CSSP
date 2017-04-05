@@ -5,7 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,12 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soshow.ssi.base.BaseController;
-
 import com.soshow.ssi.clubActivity.dto.ClubActivity;
 import com.soshow.ssi.clubActivity.dto.ClubActivityCondition;
 import com.soshow.ssi.clubActivity.service.ClubActivityService;
-import com.soshow.ssi.enums.CommStatusEnum;
 import com.soshow.ssi.enums.CommErrorEnum;
+import com.soshow.ssi.enums.CommStatusEnum;
 import com.soshow.ssi.util.MyResponse;
 
 /**
@@ -32,7 +32,7 @@ import com.soshow.ssi.util.MyResponse;
 @RequestMapping(value = "clubActivity")
 public class ClubActivityController extends BaseController{
 
-    private final Logger logger = Logger.getLogger(ClubActivityController.class);
+    private final Logger logger = LoggerFactory.getLogger(ClubActivityController.class);
 	
 	@Resource
 	private ClubActivityService clubActivityService;
@@ -47,7 +47,7 @@ public class ClubActivityController extends BaseController{
 		try {
 			ClubActivity clubActivity= clubActivityService.findById(id);
 			response.setData(clubActivity);
-			logger.info(clubActivity);
+			logger.info("",clubActivity);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -65,7 +65,7 @@ public class ClubActivityController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			Integer id = clubActivityService.add(clubActivity);
-			logger.info(id);
+			logger.info("",id);
 			response.setStatusResponse(CommStatusEnum.ADD);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -83,7 +83,7 @@ public class ClubActivityController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = clubActivityService.delete(id);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.DELETE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -101,7 +101,7 @@ public class ClubActivityController extends BaseController{
 		MyResponse<Void> response = new MyResponse<Void>();
 		try {
 			int count = clubActivityService.update(clubActivity);
-			logger.info(count);
+			logger.info("",count);
 			response.setStatusResponse(CommStatusEnum.UPDATE);
 		} catch (Throwable t) {
 			logger.error("系统错误", t);
@@ -129,7 +129,7 @@ public class ClubActivityController extends BaseController{
 			}
 			response.setToken(count);
 			List<ClubActivity> clubActivityList = clubActivityService.findPageByCondition(condition);
-			logger.info(clubActivityList);
+			logger.info("",clubActivityList);
 			response.setData(clubActivityList);
 			response.setStatusResponse(CommStatusEnum.FIND);
 		} catch (Throwable t) {
